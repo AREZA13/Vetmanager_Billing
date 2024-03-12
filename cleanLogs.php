@@ -14,20 +14,6 @@
 $folder_path = '/usr/local/mgr5/var';
 $logFolderPath = $folder_path . '/logs';
 
-// Get all *.gz files in the folder
-$files = glob($logFolderPath . '/*.gz');
-foreach ($files as $file) {
-    if (is_file($file)) {
-        // delete all gz files if there are same names in logs
-        $mainFile = basename($file, '.gz') . '.log';
-        if (is_file("{$folder_path}/" . $mainFile)) {
-            unlink($file); // Delete each file one by one
-        } else {
-            echo "Skipping: " . $file . "\n";
-        }
-    }
-}
-
 // Compress and move  *.log files from the var folder to var/logs folder
 $mainFolderFiles = glob("{$folder_path}/*.log");
 foreach ($mainFolderFiles as $file) {
